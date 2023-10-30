@@ -1,2 +1,2 @@
 # holbertonschool-AirBnB_clone
-AirBnb clone project.
+AirBnb clone project
