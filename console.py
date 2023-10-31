@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-    Module: Console
+    Module: Console.py
     Description: Console for the AirBnB project
     Task docs say: no unit tests are required for the console
 """
