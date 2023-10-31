@@ -15,7 +15,7 @@ class BaseModel:
 
     def __str__(self):
         """Print string value of class"""
-        return f"[{type(self).__name__}] {self.id} {self.to_dict()}"
+        return f"[{type(self).__name__}] ({self.id}) {self.to_dict()}"
 
     # Pbulic instance methods
     def save(self):
