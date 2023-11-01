@@ -22,17 +22,18 @@ class FileStorage:
             json.dump(data, f)
 
     def reload(self):
+        # Import here to avoid circular dependency
         from models.base_model import BaseModel
         try:
             with open(self.__file_path, 'r') as f:
                 data = json.load(f)
-
             for key, value in data.items():
                 class_name = key.split('.')[0]
-
-                if class_name in globals():
-                    obj = globals()[class_name](**value)
+                if class_name == "BaseModel":
+                    obj = BaseModel(**value)
+                    obj.id = value["id"]
+                    obj.updated_at = datetime.fromisoformat(
+                        value["updated_at"])
                     self.__objects[key] = obj
-
         except FileNotFoundError:
             pass
