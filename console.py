@@ -9,7 +9,7 @@
 import cmd
 import io
 import sys
-# from models.base_model import BaseModel
+from models.base_model import BaseModel
 
 
 class HBNBCommand(cmd.Cmd):
