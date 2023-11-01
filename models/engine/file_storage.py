@@ -3,6 +3,7 @@
 import json
 import uuid
 from datetime import datetime
+from models.base_model import BaseModel
 
 
 class FileStorage:
@@ -25,10 +26,13 @@ class FileStorage:
         try:
             with open(self.__file_path, 'r') as f:
                 data = json.load(f)
+
             for key, value in data.items():
                 class_name = key.split('.')[0]
+
                 if class_name in globals():
                     obj = globals()[class_name](**value)
                     self.__objects[key] = obj
+
         except FileNotFoundError:
             pass
