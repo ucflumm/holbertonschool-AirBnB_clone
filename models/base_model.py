@@ -31,7 +31,7 @@ class BaseModel:
     def save(self):
         """ Updates date and time """
         self.updated_at = datetime.now()
-        storage.save(self)
+        storage.save()
 
     def to_dict(self):
         """Return a dictionary format of instance"""
