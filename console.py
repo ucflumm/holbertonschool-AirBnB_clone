@@ -85,6 +85,8 @@ class HBNBCommand(cmd.Cmd):
                 print(storage.all()[key])
             except NameError:
                 print("** no instance found **")
+            except KeyError:
+                print("** no instance found **")
 
     def do_destroy(self, arg):
         """
@@ -96,6 +98,8 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
         elif arg_list[0] not in HBNBCommand.class_dict:
             print("** class doesn't exist **")
+        elif len(arg_list) < 2:
+            print("** instance id missing **")
         else:
             try:
                 key = "{}.{}".format(arg_list[0], arg_list[1])
@@ -103,6 +107,8 @@ class HBNBCommand(cmd.Cmd):
                 del storage.all()[key]
                 storage.save()
             except NameError:
+                print("** no instance found **")
+            except KeyError:
                 print("** no instance found **")
 
     def do_all(self, arg):
