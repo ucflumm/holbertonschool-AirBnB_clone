@@ -10,6 +10,7 @@ class TestAmenity(unittest.TestCase):
         """Check initialise amenity"""
         a = Amenity()
         self.assertIsInstance(a, Amenity)
+        self.assertEqual(a.name, "")
 
     def test_name(self):
         """Check Amenity name"""
