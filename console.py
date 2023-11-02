@@ -11,6 +11,13 @@ import io
 import sys
 from models.base_model import BaseModel
 from models import storage
+from models.amenity import Amenity
+from models.city import City
+from models.place import Place
+from models.review import Review
+from models.state import State
+from models.user import User
+import json
 
 
 class HBNBCommand(cmd.Cmd):
@@ -25,8 +32,9 @@ class HBNBCommand(cmd.Cmd):
     # would be good to get dynamic updating of this list
     # possibly if class_name in globals()
     # or something like that
-    class_dict = {"BaseModel": BaseModel}
-    # Probably need to add all the other classes here
+    class_dict = {"BaseModel": BaseModel, "Amenity": Amenity,
+                  "City": City, "Place": Place, "Review": Review,
+                  "State": State, "User": User}
 
     def do_quit(self, arg):
         """Quit command to exit the program"""
