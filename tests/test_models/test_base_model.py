@@ -46,6 +46,14 @@ class TestBaseModel(unittest.TestCase):
             json_data = f.read()
         self.assertIn(self.bm_id, json_data)
 
+    def test_save_alt(self):
+        """Test save method"""
+        bm_base = BaseModel()
+        old_save = str(bm_base.updated_at)
+        bm_base.save()
+        update_save = str(bm_base.updated_at)
+        self.assertNotEqual(old_save, update_save)
+
     def test_to_dict(self):
         """Test to_dict method"""
         created_at = self.bm.created_at.isoformat()
