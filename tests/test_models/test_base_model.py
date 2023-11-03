@@ -1,5 +1,6 @@
 import unittest
 from models.base_model import BaseModel
+from models.engine.file_storage import FileStorage
 
 
 class TestBaseModel(unittest.TestCase):
@@ -7,7 +8,13 @@ class TestBaseModel(unittest.TestCase):
 
     def setUp(self):
         """Init Basemodel"""
+        self.fs = FileStorage()
         self.bm = BaseModel()
+        self.fs.new(self.bm)
+
+    def tearDown(self):
+        """Clean up after each test"""
+        self.fs._FileStorage__objects.clear()
 
     def test_init(self):
         """Test init of BaseModel"""
@@ -31,6 +38,14 @@ class TestBaseModel(unittest.TestCase):
         after_save_update_at = self.bm.updated_at
         self.assertNotEqual(origin_update_at, after_save_update_at)
 
+    def test_save_updates_to_json_file(self):
+        """Test that save() updates the json file"""
+        self.bm.save()
+        self.bm_id = f"BaseModel.{self.bm.id}"
+        with open("file.json", "r") as f:
+            json_data = f.read()
+        self.assertIn(self.bm_id, json_data)
+
     def test_save_alt(self):
         """Test save method"""
         bm_base = BaseModel()
@@ -38,7 +53,6 @@ class TestBaseModel(unittest.TestCase):
         bm_base.save()
         update_save = str(bm_base.updated_at)
         self.assertNotEqual(old_save, update_save)
-
 
     def test_to_dict(self):
         """Test to_dict method"""
